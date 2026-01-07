@@ -1,13 +1,16 @@
-import { createSupabaseServerClient } from '../lib/supabase/server';
 import Link from 'next/link';
+
+import type { Database } from '@/types/supabase';
+import { createSupabaseServerClient } from '../lib/supabase/server';
+
+type Post = Database['public']['Tables']['posts']['Row'];
 
 export default async function PostsPage() {
   const supabase = await createSupabaseServerClient();
 
   const { data: posts, error } = await supabase
     .from('posts')
-    .select('id , title, content, created_at')
-    .order('created_at', { ascending: false });
+    .select('id , title, content, created_at');
 
   if (error) {
     return <div>エラーが発生しました: {error.message}</div>;
@@ -46,7 +49,7 @@ export default async function PostsPage() {
               </p>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">
-                  {new Date(post.created_at).toLocaleDateString('ja-JP')}
+                  {new Date(post.created_at!).toLocaleDateString('ja-JP')}
                 </span>
                 <Link
                   href={`/posts/${post.id}`}
