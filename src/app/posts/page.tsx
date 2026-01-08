@@ -1,9 +1,6 @@
 import Link from 'next/link';
 
-import type { Database } from '@/types/supabase';
 import { createSupabaseServerClient } from '../lib/supabase/server';
-
-type Post = Database['public']['Tables']['posts']['Row'];
 
 export default async function PostsPage() {
   const supabase = await createSupabaseServerClient();
