@@ -9,11 +9,14 @@ type PostDetailPageProps = {
 export default async function PostDetailPage({ params }: PostDetailPageProps) {
   const { id } = await params;
   const supabase = await createSupabaseBrowserClient();
+  const postId = Number(id);
+
+  if (isNaN(postId)) notFound();
 
   const { data: post, error } = await supabase
     .from('posts')
     .select('id, title, content, created_at, updated_at')
-    .eq('id', Number(id))
+    .eq('id', postId)
     .single();
 
   if (error || !post) {
