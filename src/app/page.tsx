@@ -1,10 +1,5 @@
-import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <main className="min-h-screen p-8">
-      <h1 className="text-4xl font-bold">Blog Next.js</h1>
-      <p className="mt-4">Next.jsで作るブログアプリ</p>
-    </main>
-  );
+  redirect('/posts');
 }
