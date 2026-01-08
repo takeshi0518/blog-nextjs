@@ -42,7 +42,9 @@ export default async function PostsPage() {
                 </h2>
               </Link>
               <p className="text-gray-600 mb-4">
-                {post.content.substring(0, 100)}...
+                {post.content.length > 50
+                  ? `${post.content.substring(0, 50)}...`
+                  : post.content}
               </p>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-500">
