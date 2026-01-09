@@ -9,11 +9,14 @@ type PostDetailPageProps = {
 export default async function PostDetailPage({ params }: PostDetailPageProps) {
   const { id } = await params;
   const supabase = await createSupabaseBrowserClient();
+  const postId = Number(id);
+
+  if (isNaN(postId)) notFound();
 
   const { data: post, error } = await supabase
     .from('posts')
     .select('id, title, content, created_at, updated_at')
-    .eq('id', Number(id))
+    .eq('id', postId)
     .single();
 
   if (error || !post) {
@@ -33,7 +36,7 @@ export default async function PostDetailPage({ params }: PostDetailPageProps) {
         <article className="mt-8">
           <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
 
-          <div className="flex gap-4m text-sm text-gray-500 mb-8">
+          <div className="flex gap-4 text-sm text-gray-500 mb-8">
             <span>
               作成: {new Date(post.created_at!).toLocaleDateString('ja-JP')}
             </span>
