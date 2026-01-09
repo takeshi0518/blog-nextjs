@@ -2,6 +2,8 @@ import { createSupabaseBrowserClient } from '@/app/lib/supabase/client';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import DeleteButton from '@/components/deleteButton';
+
 type PostDetailPageProps = {
   params: Promise<{ id: string }>;
 };
@@ -56,9 +58,7 @@ export default async function PostDetailPage({ params }: PostDetailPageProps) {
             >
               編集
             </Link>
-            <button className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-              削除
-            </button>
+            <DeleteButton postId={post.id} />
           </div>
         </article>
       </div>
