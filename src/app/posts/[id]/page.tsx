@@ -36,7 +36,7 @@ export default async function PostDetailPage({ params }: PostDetailPageProps) {
         <article className="mt-8">
           <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
 
-          <div className="flex gap-4m text-sm text-gray-500 mb-8">
+          <div className="flex gap-4 text-sm text-gray-500 mb-8">
             <span>
               作成: {new Date(post.created_at!).toLocaleDateString('ja-JP')}
             </span>
