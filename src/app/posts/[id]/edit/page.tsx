@@ -1,6 +1,7 @@
 import { createSupabaseServerClient } from '@/app/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
+import { PostFormField } from '@/components/postFormField';
 
 type EditPostPageProps = {
   params: Promise<{ id: string }>;
@@ -57,33 +58,7 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
         <h1 className="text-4xl font-bold mt-8 mb-8">記事編集</h1>
 
         <form action={updatePost} className="space-y-6">
-          <div>
-            <label htmlFor="title" className="block text-sm font-medium mb-2">
-              タイトル
-            </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              required
-              defaultValue={post.title}
-              className="w-full px-4 py-2 border rounded-lg focus-outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="content" className="block text-sm font-medium mb-2">
-              本文
-            </label>
-            <textarea
-              name="content"
-              id="content"
-              required
-              rows={10}
-              defaultValue={post.content}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700"
-            />
-          </div>
+          <PostFormField defaultValues={post} />
 
           <div className="flex gap-4">
             <button
