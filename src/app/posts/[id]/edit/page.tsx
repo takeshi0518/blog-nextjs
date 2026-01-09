@@ -2,6 +2,7 @@ import { createSupabaseServerClient } from '@/app/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { PostFormField } from '@/components/postFormField';
+import { PostFormActions } from '@/components/postFormActions';
 
 type EditPostPageProps = {
   params: Promise<{ id: string }>;
@@ -60,20 +61,10 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
         <form action={updatePost} className="space-y-6">
           <PostFormField defaultValues={post} />
 
-          <div className="flex gap-4">
-            <button
-              type="submit"
-              className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              更新
-            </button>
-            <Link
-              href={`/posts/${post.id}`}
-              className="px-6 py-2 border rounded hover:bg-gray-100"
-            >
-              キャンセル
-            </Link>
-          </div>
+          <PostFormActions
+            submitLabel="更新"
+            cancelHref={`/posts/${post.id}`}
+          />
         </form>
       </div>
     </main>

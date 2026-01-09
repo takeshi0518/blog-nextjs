@@ -2,6 +2,7 @@ import { createSupabaseServerClient } from '@/app/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { PostFormField } from '@/components/postFormField';
+import { PostFormActions } from '@/components/postFormActions';
 
 export default function NewPostPage() {
   async function createPost(formData: FormData) {
@@ -38,20 +39,7 @@ export default function NewPostPage() {
         <form action={createPost} className="space-y-6">
           <PostFormField />
 
-          <div className="flex gap-4">
-            <button
-              type="submit"
-              className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              作成
-            </button>
-            <Link
-              href="/posts"
-              className="px-6 py-2 border rounded hover:bg-gray-100"
-            >
-              キャンセル
-            </Link>
-          </div>
+          <PostFormActions submitLabel="作成" cancelHref="/posts" />
         </form>
       </div>
     </main>
